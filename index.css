@@ -4,7 +4,7 @@ html {
 table {
     border-collapse: collapse;
 }
-#top {
+.top {
     height: 50px;
 }
 td {
@@ -18,9 +18,9 @@ th {
     width: 560px;
     background-color: #fbb;
 }
-#top #even {
+.top .even {
     background-color: #ddd;
 }
-#top #odd {
+.top .odd {
     background-color: #bbb;
 }
