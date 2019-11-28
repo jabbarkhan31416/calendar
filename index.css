@@ -1,11 +1,26 @@
+html {
+    background-color: #999;
+}
 table {
-    width: 560px;
-    border: 1px solid;
     border-collapse: collapse;
 }
 #top {
     height: 50px;
 }
-#top td {
-    border: 1px solid;
+td {
+    width: 80px;
+    text-align: center;
+}
+td[colspan="5"] {
+    width: 400px;
+}
+th {
+    width: 560px;
+    background-color: #fbb;
+}
+#top #even {
+    background-color: #ddd;
+}
+#top #odd {
+    background-color: #bbb;
 }

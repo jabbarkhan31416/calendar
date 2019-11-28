@@ -1,20 +1,23 @@
 <html>
     <head>
         <title>Calendar</title>
-        <link rel="stylesheet" type="text/css" href="calendar.css"/>
-        <script type="text/javascript" src="calendar.js"></script>
+        <link rel="stylesheet" type="text/css" href="index.css"/>
+        <script type="text/javascript" src="index.js"></script>
     </head>
     <body>
         <table>
-            <tr id="top">
-                <td><button id="pre-year">&lt;</button></td>
-                <td id="year" colspan="5">Year</td>
-                <td><button id="nex-year">&gt;</button></td>
+            <tr class="top">
+                <th colspan="7">Calender</th>
             </tr>
-            <tr id="top">
-                <td><button id="pre-month">&lt;</button></td>
-                <td id="month" colspan="5">Month</td>
-                <td><button id="nex-month">&gt;</button></td>
+            <tr class="top">
+                <td id="pre-year" class="even">&lt;</td>
+                <td id="year" colspan="5" class="odd">Year</td>
+                <td id="nex-year" class="even">&gt;</td>
+            </tr>
+            <tr class="top">
+                <td id="pre-month" class="odd">&lt;</td>
+                <td id="month" colspan="5" class="even">Month</td>
+                <td id="nex-month" class="odd">&gt;</td>
             </tr>
         </table>
     </body>
