@@ -16,11 +16,11 @@ td[colspan="5"] {
 }
 th {
     width: 560px;
-    background-color: #fbb;
+    background-color: #99f;
 }
 .top .even {
-    background-color: #ddd;
+    background-color: #fbb;
 }
 .top .odd {
-    background-color: #bbb;
+    background-color: #f99;
 }
