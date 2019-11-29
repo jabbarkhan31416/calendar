@@ -18,9 +18,9 @@ th {
     width: 560px;
     background-color: #99f;
 }
-.top .even {
+.top .even, .sun.even {
     background-color: #fbb;
 }
-.top .odd {
+.top .odd, .sun.odd {
     background-color: #f99;
 }
