@@ -8,18 +8,20 @@ window.addEventListener("DOMContentLoaded", e=>{
         const day = time.getDay()
         const month = time.getMonth()
         const year = time.getYear()
-        const febDays = (
+        const febDates = (
             year%4 !== 0 ? 28 :
             year%400 === 0 ? 29 :
             year%100 === 0 ? 28 :
             29
         )
-        const totalDays = [
-            31, febDays, 31,
+        const datesArray =[
+            31, febDates, 31,
             30, 31, 30,
             31, 31, 30,
             31, 30, 31
-        ][month]
+        ]
+        const totalDates = datesArray[month]
+        const preTotalDates = datesArray[month===0 ? 11 : month-1]
         
     }
 })
