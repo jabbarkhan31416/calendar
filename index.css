@@ -24,3 +24,12 @@ th {
 .top .odd, .sun.odd {
     background-color: #f99;
 }
+.odd {
+    background-color: #bbf;
+}
+.even {
+    background-color: #99f;
+}
+.selected {
+    background-color: #bbb;
+}
