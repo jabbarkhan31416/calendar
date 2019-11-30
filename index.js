@@ -24,5 +24,6 @@ window.addEventListener("DOMContentLoaded", e=>{
         const totalDates = datesArray0[month]
         const preTotalDates = datesArray0[month===0 ? 11 : month-1]
         const firstDay = (day-date+36) % 7
+        const totalWeeks = Math.ceil((firstDay+totalDates) / 7)
     }
 })

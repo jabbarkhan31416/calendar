@@ -33,3 +33,9 @@ th {
 .selected {
     background-color: #bbb;
 }
+.current {
+    font-weight: bold;
+}
+.cell {
+    height: 96;
+}
