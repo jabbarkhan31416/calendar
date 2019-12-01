@@ -36,6 +36,12 @@ th {
 .current {
     font-weight: bold;
 }
-.cell {
-    height: 96;
+.tr-w4 {
+    height: 60;
+}
+.tr-w5 {
+    height: 48;
+}
+.tr-w6 {
+    height: 40;
 }
