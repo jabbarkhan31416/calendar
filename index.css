@@ -18,19 +18,22 @@ th {
     width: 560px;
     background-color: #99f;
 }
-.top .even, .sun.even {
-    background-color: #fbb;
+.top .even, .sun-even {
+    background-color: #fdb;
 }
-.top .odd, .sun.odd {
-    background-color: #f99;
+.top .odd, .sun-odd {
+    background-color: #fb9;
 }
 .odd {
-    background-color: #bbf;
-}
-.even {
     background-color: #99f;
 }
-.selected {
+.even {
+    background-color: #bbf;
+}
+.sun-odd.selected,
+.sun-even.selected,
+.odd.selected,
+.even.selected {
     background-color: #bbb;
 }
 .current {

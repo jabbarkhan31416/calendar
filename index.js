@@ -10,9 +10,9 @@ window.addEventListener("DOMContentLoaded", e=>{
         31, 30, 31
     ]
     const isLeapYear = y=>(
-        year%4 !== 0 ? false :
-        year%400 === 0 ? true :
-        year%100 === 0 ? false :
+        y%4 !== 0 ? false :
+        y%400 === 0 ? true :
+        y%100 === 0 ? false :
         true
     )
     const render = time=>{
@@ -27,30 +27,51 @@ window.addEventListener("DOMContentLoaded", e=>{
         const preTotalDates = datesArray0[month===0 ? 11 : month-1]
         const firstDay = (day-date+36) % 7
         const totalWeeks = Math.ceil((firstDay+totalDates) / 7)
+
+        while(table.childElementCount>3) table.removeChild(table.lastChild)
         {
-            while(table.childElementCount>3) table.removeChild(table.lastChild)
-            let i = 0
-            let j = (new Array(firstDay)).fill(0).map(
-                (_,x) => x+1+preTotalDates-firstDay
-            ).concat(
-                (new Array(totalDates).fill(0).map((_,x) => x+1))
-            ).concat(
-                (new Array(totalWeeks*7 - totalDates - firstDay)).fill(0).map((_,x) => x+1)
-            )
-            console.log(j)
-            while(i<totalWeeks){
-                let k = 0
+            const yearTr = document.getElementById("year")
+            yearTr.textContent = 1900+year
+        }
+        {
+            const monthTr = document.getElementById("month")
+            monthTr.textContent = [
+                "January", "February", "March",
+                "April", "May", "June",
+                "July", "August", "September",
+                "October", "November", "December"
+            ][month]
+        }
+        let i = 0
+        let j = (new Array(firstDay)).fill(0).map(
+            (_,x) => [x+1+preTotalDates-firstDay, 0]
+        ).concat(
+            (new Array(totalDates).fill(0).map((_,x) => [x+1,1]))
+        ).concat(
+            (new Array(totalWeeks*7 - totalDates - firstDay)).fill(0).map((_,x) => [x+1,0])
+        )
+        console.log(datesArray0)
+        while(i<totalWeeks){
+            let k = 0
+            {
                 const tr = document.createElement("tr")
                 tr.setAttribute("class", "tr-w"+totalWeeks)
+                while(k<7){
+                    {
+                        const td = document.createElement("td")
+                        {
+                            const text = document.createTextNode(j[0][0])
+                            td.appendChild(text)
+                        }
+                        td.setAttribute("class", (j[0][1]?"current":"") + (k==0?" sun-":" ") + ((i^k)%2 ? "odd" : "even"))
+                        tr.appendChild(td)
+                    }
+                        k = k+1
+                    j.shift()
+                }
                 table.appendChild(tr)
-                /*while(k<7){
-                    const td = document.createElement("td")
-                    td.setAttribute("class", cssClass + ((i^k)%2 ? " odd" : " even"))
-                    tr.appendChild(td)
-                    k = k+1
-                }*/
-                i = i+1
             }
+            i = i+1
         }
     }
     render(new Date())
