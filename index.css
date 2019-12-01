@@ -3,6 +3,7 @@ html {
 }
 table {
     border-collapse: collapse;
+    margin: 0 auto;
 }
 .top, .week {
     height: 50px;

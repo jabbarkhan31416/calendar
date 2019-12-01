@@ -3,6 +3,7 @@
 
 window.addEventListener("DOMContentLoaded", e=>{
     const table = document.getElementsByTagName("tbody")[0]
+    let tdArray = []
     const datesArray =[
         31, null, 31,
         30, 31, 30,
@@ -29,6 +30,7 @@ window.addEventListener("DOMContentLoaded", e=>{
         const totalWeeks = Math.ceil((firstDay+totalDates) / 7)
 
         while(table.childElementCount>3) table.removeChild(table.lastChild)
+        tdArray = []
         {
             const yearTr = document.getElementById("year")
             yearTr.textContent = 1900+year
@@ -65,6 +67,7 @@ window.addEventListener("DOMContentLoaded", e=>{
                         }
                         td.setAttribute("class", (j[0][1]?"current":"") + (k==0?" sun-":" ") + ((i^k)%2 ? "odd" : "even"))
                         tr.appendChild(td)
+                        tdArray.push(td)
                     }
                         k = k+1
                     j.shift()
@@ -75,4 +78,5 @@ window.addEventListener("DOMContentLoaded", e=>{
         }
     }
     render(new Date())
+    console.log(tdArray)
 })
