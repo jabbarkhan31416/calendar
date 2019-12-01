@@ -4,7 +4,7 @@ html {
 table {
     border-collapse: collapse;
 }
-.top {
+.top, .week {
     height: 50px;
 }
 td {
