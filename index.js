@@ -35,7 +35,7 @@ window.addEventListener("DOMContentLoaded", e=>{
             ).concat(
                 (new Array(totalDates).fill(0).map((_,x) => x+1))
             ).concat(
-                (new Array(totalWeeks*7 - totalDates - firstDay)).map((_,x) => x+1)
+                (new Array(totalWeeks*7 - totalDates - firstDay)).fill(0).map((_,x) => x+1)
             )
             console.log(j)
             while(i<totalWeeks){
@@ -43,12 +43,12 @@ window.addEventListener("DOMContentLoaded", e=>{
                 const tr = document.createElement("tr")
                 tr.setAttribute("class", "tr-w"+totalWeeks)
                 table.appendChild(tr)
-                while(k<7){
+                /*while(k<7){
                     const td = document.createElement("td")
                     td.setAttribute("class", cssClass + ((i^k)%2 ? " odd" : " even"))
                     tr.appendChild(td)
                     k = k+1
-                }
+                }*/
                 i = i+1
             }
         }
