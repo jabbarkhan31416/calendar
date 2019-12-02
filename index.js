@@ -5,6 +5,30 @@ window.addEventListener("DOMContentLoaded", e=>{
     const table = document.getElementsByTagName("tbody")[0]
     let tdArray = []
     let patternArray = []
+    let selectedDate, selectedMonth, selectedYear
+
+    document.getElementById("pre-year").addEventListener("click", e=>{
+        selectedYear = selectedYear-1
+        render(selectedDate,selectedMonth,selectedYear)
+    })
+    document.getElementById("nex-year").addEventListener("click", e=>{
+        selectedYear = selectedYear+1
+        render(selectedDate,selectedMonth,selectedYear)
+    })
+    document.getElementById("pre-month").addEventListener("click", e=>{
+        [selectedMonth,selectedYear] = (
+            selectedMonth==0 ? [11, selectedYear-1] :
+            [selectedMonth-1, selectedYear]
+        )
+        render(selectedDate,selectedMonth,selectedYear)
+    })
+    document.getElementById("nex-month").addEventListener("click", e=>{
+        [selectedMonth,selectedYear] = (
+            selectedMonth==11 ? [0, selectedYear+1] :
+            [selectedMonth+1, selectedYear]
+        )
+        render(selectedDate,selectedMonth,selectedYear)
+    })
     const datesArray =[
         31, null, 31,
         30, 31, 30,
@@ -17,26 +41,35 @@ window.addEventListener("DOMContentLoaded", e=>{
         y%100 === 0 ? false :
         true
     )
-    const render = time=>{
-        const date = time.getDate()
-        const day = time.getDay()
-        const month = time.getMonth()
-        const year = time.getFullYear()
 
+    const render = (date,month,year)=>{
         const datesArray0 = datesArray.map(x=>(
             x ? x :
             isLeapYear(year) ? 29 :
             28
         ))
+        const realdate = (
+            date<1 ? 1 :
+            date>datesArray0[month] ? datesArray0[month] :
+            date
+        )
+        const day = (new Date(year,month,date)).getDay()
+
+        selectedDate = realdate
+        selectedDay = day
+        selectedMonth = month
+        selectedYear = year
+
         const totalDates = datesArray0[month]
         const preTotalDates = datesArray0[month===0 ? 11 : month-1]
-        const firstDay = (day-date+36) % 7
+        const firstDay = (day-realdate+36) % 7
         const totalWeeks = Math.ceil((firstDay+totalDates) / 7)
 
         while(table.childElementCount>3) table.removeChild(table.lastChild)
         tdArray = []
         
         document.getElementById("year").textContent = year
+        document.getElementById("pre-year").addEventListener
         
         document.getElementById("month").textContent = [
             "January", "February", "March",
@@ -59,18 +92,25 @@ window.addEventListener("DOMContentLoaded", e=>{
             const tr = document.createElement("tr")
             tr.setAttribute("class", "tr-w"+totalWeeks)
             table.appendChild(tr)
-            return a.map(([x], j)=>{
+            return a.map(([x,m], j)=>{
                 const td = document.createElement("td")
-                const id = "date-"+i+","+j
-                td.setAttribute("id", id)
+                td.setAttribute("id", "date-"+i+","+j)
+                td.setAttribute(
+                    "class",
+                    (j==0 ? "sun" : "") +
+                    ((i+j)%2 ? " odd" : " even") +
+                    (!m ? " current" : "") /*+
+                    (!m&&(x==realdate) ? " selected" : "")*/
+                )
                 td.textContent = x
                 tr.appendChild(td)
                 return td
             })
         })
-
-        console.log(patternArray)
     }
-    render(new Date())
-    console.log(tdArray)
+    render(
+        (new Date()).getDate(),
+        (new Date()).getMonth(),
+        (new Date()).getFullYear()
+    )
 })
