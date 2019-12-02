@@ -31,51 +31,23 @@ window.addEventListener("DOMContentLoaded", e=>{
 
         while(table.childElementCount>3) table.removeChild(table.lastChild)
         tdArray = []
-        {
-            const yearTr = document.getElementById("year")
-            yearTr.textContent = 1900+year
-        }
-        {
-            const monthTr = document.getElementById("month")
-            monthTr.textContent = [
-                "January", "February", "March",
-                "April", "May", "June",
-                "July", "August", "September",
-                "October", "November", "December"
-            ][month]
-        }
-        let i = 0
-        let j = (new Array(firstDay)).fill(0).map(
-            (_,x) => [x+1+preTotalDates-firstDay, 0]
-        ).concat(
-            (new Array(totalDates).fill(0).map((_,x) => [x+1,1]))
-        ).concat(
-            (new Array(totalWeeks*7 - totalDates - firstDay)).fill(0).map((_,x) => [x+1,0])
-        )
-        console.log(datesArray0)
-        while(i<totalWeeks){
-            let k = 0
-            {
-                const tr = document.createElement("tr")
-                tr.setAttribute("class", "tr-w"+totalWeeks)
-                while(k<7){
-                    {
-                        const td = document.createElement("td")
-                        {
-                            const text = document.createTextNode(j[0][0])
-                            td.appendChild(text)
-                        }
-                        td.setAttribute("class", (j[0][1]?"current":"") + (k==0?" sun-":" ") + ((i^k)%2 ? "odd" : "even"))
-                        tr.appendChild(td)
-                        tdArray.push(td)
-                    }
-                        k = k+1
-                    j.shift()
-                }
-                table.appendChild(tr)
-            }
-            i = i+1
-        }
+        
+        document.getElementById("year").textContent = 1900+year
+        
+        document.getElementById("month").textContent = [
+            "January", "February", "March",
+            "April", "May", "June",
+            "July", "August", "September",
+            "October", "November", "December"
+        ][month]
+        
+        let arr = (new Array(totalWeeks)).fill(0).map((_,x)=>(
+            (new Array(7)).fill(0).map((_,y)=>(
+                7*x + y
+            ))
+        ))
+
+        console.log(arr)
     }
     render(new Date())
     console.log(tdArray)
