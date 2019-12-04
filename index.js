@@ -10,7 +10,8 @@ window.addEventListener("DOMContentLoaded", e=>{
         patternArray[i][j][1]==0 ? (
             tdArray[selectedcell[0]][selectedcell[1]].classList.toggle("selected"),
             tdArray[i][j].classList.toggle("selected"),
-            selectedcell = [i,j]
+            selectedcell = [i,j],
+            selectedDate = date
         ) :
         patternArray[i][j][1]==-1 ? (
             render(
