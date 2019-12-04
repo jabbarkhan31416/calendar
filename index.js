@@ -28,8 +28,8 @@ window.addEventListener("DOMContentLoaded", e=>{
     )
 
     const dateEvent = e=>{
-        const id = e.path[0].getAttribute("id")
-        const date = e.path[0].textContent
+        const id = e.composedPath()[0].getAttribute("id")
+        const date = e.composedPath()[0].textContent
         const [i,j] = id.split("-")[1].split(",").map(x=>Number(x))
         select(i,j,date)
     }
