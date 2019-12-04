@@ -11,6 +11,8 @@ table {
 td {
     width: 80px;
     text-align: center;
+    background: linear-gradient(0.125turn, #aaa, #ddd);
+    cursor: default;
 }
 .top td[colspan="5"] {
     width: 400px;
@@ -22,9 +24,6 @@ td {
 th {
     width: 560px;
     background-color: #99f;
-}
-td {
-    background: linear-gradient(0.125turn, #aaa, #ddd);
 }
 td.current, .week * {
     background: linear-gradient(0.375turn, #68f, #ade);
