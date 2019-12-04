@@ -12,33 +12,28 @@ td {
     width: 80px;
     text-align: center;
 }
-td[colspan="5"] {
+.top td[colspan="5"] {
     width: 400px;
+    background: #aaa;
+}
+.top td {
+    background: linear-gradient(0.5turn, #aaa, #ddd);
 }
 th {
     width: 560px;
     background-color: #99f;
 }
-.top .even, .sun.even {
-    background-color: #fdb;
+td {
+    background: linear-gradient(0.125turn, #aaa, #ddd);
 }
-.top .odd, .sun.odd {
-    background-color: #fb9;
+td.current, .week * {
+    background: linear-gradient(0.375turn, #68f, #ade);
 }
-.odd {
-    background-color: #99f;
+.top *, .sun.current, .week .sun {
+    background: linear-gradient(0.375turn, #e86, #faa);
 }
-.even {
-    background-color: #bbf;
-}
-.sun.odd.selected,
-.sun.even.selected,
-.odd.selected,
-.even.selected {
-    background-color: #999;
-}
-.current {
-    font-weight: bold;
+td.selected, td.sun.selected {
+    background: linear-gradient(0.375turn, #777, #aaa);
 }
 .tr-w4 {
     height: 60;

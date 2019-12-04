@@ -1,34 +1,58 @@
 
 
-
 window.addEventListener("DOMContentLoaded", e=>{
     const table = document.getElementsByTagName("tbody")[0]
     let tdArray = []
     let patternArray = []
-    let selectedDate, selectedMonth, selectedYear
+    let selectedDate, selectedMonth, selectedYear, selectedcell
 
-    document.getElementById("pre-year").addEventListener("click", e=>{
-        selectedYear = selectedYear-1
-        render(selectedDate,selectedMonth,selectedYear)
-    })
-    document.getElementById("nex-year").addEventListener("click", e=>{
-        selectedYear = selectedYear+1
-        render(selectedDate,selectedMonth,selectedYear)
-    })
-    document.getElementById("pre-month").addEventListener("click", e=>{
-        [selectedMonth,selectedYear] = (
-            selectedMonth==0 ? [11, selectedYear-1] :
-            [selectedMonth-1, selectedYear]
+    const select = (i,j,date)=>(
+        patternArray[i][j][1]==0 ? (
+            tdArray[selectedcell[0]][selectedcell[1]].classList.toggle("selected"),
+            tdArray[i][j].classList.toggle("selected"),
+            selectedcell = [i,j]
+        ) :
+        patternArray[i][j][1]==-1 ? (
+            render(
+                date,
+                selectedMonth==0 ? 11 : selectedMonth-1,
+                selectedMonth==0 ? selectedYear-1 : selectedYear
+            )
+        ) :
+        render(
+            date,
+            selectedMonth==11 ? 0 : selectedMonth+1,
+            selectedMonth==11 ? selectedYear+1 : selectedYear
         )
-        render(selectedDate,selectedMonth,selectedYear)
-    })
-    document.getElementById("nex-month").addEventListener("click", e=>{
-        [selectedMonth,selectedYear] = (
-            selectedMonth==11 ? [0, selectedYear+1] :
-            [selectedMonth+1, selectedYear]
+    )
+
+    const dateEvent = e=>{
+        const id = e.path[0].getAttribute("id")
+        const date = e.path[0].textContent
+        const [i,j] = id.split("-")[1].split(",").map(x=>Number(x))
+        select(i,j,date)
+    }
+
+    document.getElementById("pre-year").addEventListener("click", e=>(
+        render(selectedDate, selectedMonth, selectedYear-1)
+    ))
+    document.getElementById("nex-year").addEventListener("click", e=>(
+        render(selectedDate, selectedMonth, selectedYear+1)
+    ))
+    document.getElementById("pre-month").addEventListener("click", e=>(
+        render(
+            selectedDate,
+            selectedMonth==0 ? 11 : selectedMonth-1,
+            selectedMonth==0 ? selectedYear-1 : selectedYear
         )
-        render(selectedDate,selectedMonth,selectedYear)
-    })
+    ))
+    document.getElementById("nex-month").addEventListener("click", e=>(
+        render(
+            selectedDate,
+            selectedMonth==11 ? 0 : selectedMonth+1,
+            selectedMonth==11 ? selectedYear+1 : selectedYear
+        )
+    ))
     const datesArray =[
         31, null, 31,
         30, 31, 30,
@@ -93,16 +117,18 @@ window.addEventListener("DOMContentLoaded", e=>{
             tr.setAttribute("class", "tr-w"+totalWeeks)
             table.appendChild(tr)
             return a.map(([x,m], j)=>{
+                !m&&(x==realdate) ? selectedcell=[i,j] : 0 
                 const td = document.createElement("td")
                 td.setAttribute("id", "date-"+i+","+j)
                 td.setAttribute(
                     "class",
-                    (j==0 ? "sun" : "") +
-                    ((i+j)%2 ? " odd" : " even") +
-                    (!m ? " current" : "") /*+
-                    (!m&&(x==realdate) ? " selected" : "")*/
+                    (j==0 ? "sun " : "") +
+                    ((i+j)%2 ? "odd" : "even") +
+                    (!m ? " current" : "") +
+                    (!m&&(x==realdate) ? " selected" : "")
                 )
                 td.textContent = x
+                td.addEventListener("click", dateEvent)
                 tr.appendChild(td)
                 return td
             })
