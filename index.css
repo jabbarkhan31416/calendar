@@ -32,7 +32,7 @@ td.current, .week * {
     background: linear-gradient(0.375turn, #e86, #faa);
 }
 td.selected, td.sun.selected {
-    background: linear-gradient(0.375turn, #777, #aaa);
+    background: linear-gradient(0.375turn, #757, #cac);
 }
 .tr-w4 {
     height: 60;
